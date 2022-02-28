@@ -1,0 +1,464 @@
+{
+	"info": {
+		"_postman_id": "020bf768-81d0-4647-aa23-73b1e9cef86e",
+		"name": "WhoIsThis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all companies",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Transfer-Encoding",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/companies",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all contacts (TEST)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/contacts",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get paginated contacts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/contacts/collection?page=1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						"collection"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a contact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"Jane\",\n    \"last_name\": \"Doe\",\n    \"email\": \"janedoe@example.com\",\n    \"phone\": \"1234567890\",\n    \"address\": \"123 Street\",\n    \"town_city\": \"Sleepy Town\",\n    \"region_county\": \"Vastland\",\n    \"country_code\": \"UK\",\n    \"post_code\": \"AB1 2CD\"\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/contacts",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get single contact",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/contacts/:ID",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						":ID"
+					],
+					"variable": [
+						{
+							"key": "ID",
+							"value": "{{CONTACT_ID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit a contact",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"Jean\",\n    \"last_name\": \"Doe\",\n    \"email\": \"janedoe@example.com\",\n    \"phone\": \"1234567890\",\n    \"address\": \"123 Street\",\n    \"town_city\": \"Sleepy Town\",\n    \"region_county\": \"Vastland\",\n    \"country_code\": \"UK\",\n    \"post_code\": \"AB1 2CD\"\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/contacts/:ID",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						":ID"
+					],
+					"variable": [
+						{
+							"key": "ID",
+							"value": "{{CONTACT_ID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all contacts for a company",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/companies/:ID/contacts",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"companies",
+						":ID",
+						"contacts"
+					],
+					"variable": [
+						{
+							"key": "ID",
+							"value": "{{COMPANY_ID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find contact by name",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/contacts?name={{CONTACT_NAME_SEARCH_STR}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "{{CONTACT_NAME_SEARCH_STR}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find contact by Company name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/contacts?company={{COMPANY_NAME_SEARCH_STR}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts"
+					],
+					"query": [
+						{
+							"key": "company",
+							"value": "{{COMPANY_NAME_SEARCH_STR}}"
+						},
+						{
+							"key": null,
+							"value": "Bahringer-Gislason",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create contact notes",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"note\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\"\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/contacts/:ID/note",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						":ID",
+						"note"
+					],
+					"variable": [
+						{
+							"key": "ID",
+							"value": "{{CONTACT_ID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create company contacts",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"contacts\": [\n        {\n            \"first_name\": \"Jane\",\n            \"last_name\": \"Doe\",\n            \"email\": \"janedoe@example.com\",\n            \"phone\": \"1234567890\",\n            \"address\": \"123 Street\",\n            \"town_city\": \"Sleepy Town\",\n            \"region_county\": \"Vastland\",\n            \"country_code\": \"UK\",\n            \"post_code\": \"AB1 2CD\"\n        },\n        {\n            \"first_name\": \"Jane\",\n            \"last_name\": \"Blogs\",\n            \"email\": \"janeblogs@example.com\",\n            \"phone\": \"1234567890\",\n            \"address\": \"123 Street\",\n            \"town_city\": \"Sleepy Town\",\n            \"region_county\": \"Vastland\",\n            \"country_code\": \"UK\",\n            \"post_code\": \"AB1 2CD\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/companies/:ID/contacts",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"companies",
+						":ID",
+						"contacts"
+					],
+					"variable": [
+						{
+							"key": "ID",
+							"value": "{{COMPANY_ID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://newlaravel.test"
+		},
+		{
+			"key": "TOKEN",
+			"value": "1|0moNImBzPFwzilPx43k5nq5f42B3hQHHUx6Ywz0J "
+		},
+		{
+			"key": "COMPANY_ID",
+			"value": "1"
+		},
+		{
+			"key": "CONTACT_ID",
+			"value": "1"
+		},
+		{
+			"key": "CONTACT_NAME_SEARCH_STR",
+			"value": "Laur",
+			"type": "string"
+		},
+		{
+			"key": "COMPANY_NAME_SEARCH_STR",
+			"value": "Schroeder",
+			"type": "string"
+		}
+	]
+}
