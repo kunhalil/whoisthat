@@ -1,6 +1,6 @@
 # About WhoIsThat
 
-This is demo app for Contact Manager API.
+WhoIsThat is demo app for Contact Manager API.
 
 Uses [Laravel Sanctum](https://github.com/laravel/sanctum) for authentication.
 
