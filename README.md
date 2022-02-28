@@ -23,7 +23,7 @@ Make sure that you have a PHP ecosystem ready for testing and you have;
 8. Run `php artisan db:seed` to populate the database with test data
 9. Run `php artisan serve` to start the local development server
 
-## Testing
+## Testing / Consuming APIs
 It is necessary to be a registered user and issue user token to make API calls.
 
 During migration a demo user is already created with the credentials;
@@ -32,7 +32,7 @@ During migration a demo user is already created with the credentials;
 
 Alternatively you can register as a new user and create a Token.
 
-#### Postman Collection file for Testing
+### Postman Collection file for Testing
 A postman collection file is included for testing.
 
 Download the collection file [postman_collection.json](postman_collection.json) and import into postman.
@@ -45,7 +45,7 @@ Postman global variables arre used as follows;
 - CONTACT_NAME_SEARCH_STR: `Contact first or last name` search string to find matching contacts
 - COMPANY_NAME_SEARCH_STR: `Company name` search string to find matching contacts
 
-#### End points
+### End points
 
 Following are end points available for testing;
 
