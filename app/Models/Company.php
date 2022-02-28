@@ -10,6 +10,18 @@ class Company extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'address',
+        'town_city',
+        'region_county',
+        'country_code',
+        'post_code',
+    ];
+
+
     /**
      * @return HasMany
      */

@@ -20,22 +20,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+/***
+ * V1 API routes
+ */
 Route::prefix('v1')->group(function() {
-
     Route::middleware('auth:sanctum')->group(function() {
-
-        Route::apiResource('companies', CompaniesController::class);
+        /***
+         * Company Routes
+         */
         Route::get('companies/{company}/contacts', [CompaniesController::class, 'contacts']);
+        Route::put('companies/{company}/contacts', [CompaniesController::class, 'storeContacts']);
+        Route::apiResource('companies', CompaniesController::class);
 
+        /***
+         * Contact Routes
+         */
+        Route::get('contacts/collection', [ContactsController::class, 'collection']);
+        Route::put('contacts/{contact}/note', [ContactsController::class, 'addNote']);
         Route::apiResource('contacts', ContactsController::class);
-        Route::post('contacts/{contact}/note', [ContactsController::class, 'addNote']);
-        Route::get('collection/contacts', [ContactsController::class, 'collection']);
-
-        // Route::prefix('contacts')
-        // ->as('contacts')
-        // ->group(function () {
-        //     Route::get('/{contact}', [ContactsController::class, 'show']);
-        //     Route::post('/', [ContactsController::class, 'store']);
-        // });
     });
 });

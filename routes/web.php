@@ -14,10 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/***
+ * Default Site Routes
+ */
 Route::get('/', function () {
     return view('welcome');
 });
 
+/***
+ * Authentication Routes
+ */
+require __DIR__.'/auth.php';
+
+/***
+ * Auth routes for User Token administration
+ */
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/tokens/create', [DashboardController::class, 'tokenForm'])->name('tokens.form');
@@ -25,4 +36,3 @@ Route::middleware('auth')->group(function () {
     Route::post('/tokens/delete/{token}', [DashboardController::class, 'deleteToken'])->name('tokens.delete');
 });
 
-require __DIR__.'/auth.php';

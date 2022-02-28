@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ContactNoteRequest;
 use App\Http\Requests\ContactRequest;
 use App\Http\Resources\ContactCollection;
 use App\Http\Resources\ContactResource;
@@ -24,18 +25,6 @@ class ContactsController extends Controller
         $contacts = Contact::filter($filters)->get();
 
         return ContactResource::collection($contacts);
-    }
-
-    /**
-     * Display a paginated listing of the contacts.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function collection() : ContactCollection
-    {
-        $contacts = Contact::paginate();
-
-        return new ContactCollection($contacts);
     }
 
     /**
@@ -96,13 +85,29 @@ class ContactsController extends Controller
     //     return ContactResource::collection($contacts);
     // }
 
-    public function addNote(Contact $contact)
+    /**
+     * Display a paginated listing of the contacts.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function collection() : ContactCollection
     {
-        Request::validate([
-            'note' => 'required|min:3|max:1000',
-        ]);
+        $contacts = Contact::paginate();
 
-        $note = new ContactNote(Request::only('note'));
+        return new ContactCollection($contacts);
+    }
+
+    /**
+     * Display a paginated listing of the contacts.
+     *
+     * @param  \App\Http\Requests\ContactNoteRequest  $request
+     * @param  \App\Models\Contact $contact
+     * @return \Illuminate\Http\Response
+     */
+    public function addNote(ContactNoteRequest $request, Contact $contact)
+    {
+        $note = new ContactNote($request->only('note'));
+
         $contact->notes()->save($note);
         $contact->load('notes');
 

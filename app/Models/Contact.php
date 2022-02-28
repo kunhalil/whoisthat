@@ -41,9 +41,12 @@ class Contact extends Model
 
     public function scopeFilter($query, array $filters)
     {
+        // filter for first or last name matches
         $query->when($filters['name'] ?? null, function ($query, $searchName) {
-            $query->where('first_name', 'like', '%'.$searchName.'%')
-                  ->orWhere('last_name', 'like', '%'.$searchName.'%');
+            $query->where('first_name', 'like', $searchName.'%')
+                  ->orWhere('last_name', 'like', $searchName.'%');
+
+        // filter based on company name (relationship)
         })->when($filters['company'] ?? null, function ($query, $searchCompany) {
             $query->whereHas('company', function($q) use ($searchCompany) {
                 $q->where('name', 'like', '%'.$searchCompany.'%');

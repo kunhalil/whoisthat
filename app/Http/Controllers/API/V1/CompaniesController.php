@@ -4,9 +4,11 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyRequest;
+use App\Http\Requests\ContactRequest;
 use App\Http\Resources\CompanyResource;
-use App\Http\Resources\ContactCollection;
 use App\Models\Company;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CompaniesController extends Controller
 {
@@ -88,6 +90,40 @@ class CompaniesController extends Controller
      */
     public function contacts(Company $company)
     {
+        $company->load('contacts');
+
+        return new CompanyResource($company);
+    }
+
+     /**
+     * Store multiple contacts for a company.
+     *
+     * @param  \App\Models\Company $company
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeContacts(Company $company, Request $request)
+    {
+        $collection = collect((new ContactRequest)->rules());
+
+        $rules = collect($collection)->reject(function ($rule, $key) {
+            return $key == 'company_id';
+        })->mapWithKeys(function ($rule, $key) {
+            return ['contacts.*.' . $key => $rule];
+        })->all();
+
+        $validator = Validator::make($request->all(), array_merge(
+            ['contacts' => 'array'], $rules
+        ));
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $validatedData = $validator->safe()->only('contacts');
+
+        $company->contacts()->createMany($validatedData['contacts']);
+
         $company->load('contacts');
 
         return new CompanyResource($company);
